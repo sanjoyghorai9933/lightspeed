@@ -4,118 +4,95 @@
 {% block content %}
 
 <!-- ══ HERO ════════════════════════════════════════════ -->
-<section class="ls-hero">
-  <div class="ls-hero-bg-img">
-    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1800&q=75" alt="">
-  </div>
-  <div class="ls-hero-pattern"></div>
-  <div class="ls-hero-gradient"></div>
-  <div class="ls-particles"></div>
-
-  <div class="container ls-hero-content py-5">
-    <div class="row align-items-center g-5">
-      <!-- Left -->
-      <div class="col-lg-6">
-        <div class="d-flex align-items-center gap-3 mb-4" data-anim="fade-down" data-delay="50">
-          <img src="{{ url_for('static', filename='images/logo.jpg') }}"
-               alt="Lightseed" width="60" height="60"
-               style="border-radius:10px;object-fit:cover;border:1.5px solid rgba(201,168,76,0.4);">
-          <div>
-            <span class="eyebrow mb-0" style="margin-bottom:0;">Lightseed Solutions LLP</span>
-            <div style="font-size:0.6rem;letter-spacing:0.18em;color:rgba(250,246,238,0.35);text-transform:uppercase;">Dehradun, India</div>
-          </div>
-        </div>
-        <h1 class="ls-hero" data-anim="fade-up" data-delay="150">
-          Where Inner Alignment<br>Meets Outer Excellence
-        </h1>
-        <p class="ls-hero-sub mt-3 mb-4" data-anim="fade-up" data-delay="280">
-          <strong>Leadership. Institutions. Individuals.</strong><br>
-          Lightseed develops the human foundations that shape behaviour, culture, and sustainable performance.
-        </p>
-        <div class="d-flex flex-wrap gap-3" data-anim="fade-up" data-delay="400">
-          <a href="/contact" class="btn-ls-primary">Begin the Conversation</a>
-          <a href="/services" class="btn-ls-outline">Explore Programs</a>
-        </div>
-      </div>
-      <!-- Right: Quick-access cards -->
-      <div class="col-lg-6">
-        <div id="homeBannerSlides" class="carousel slide ls-hero-carousel mb-3" data-bs-ride="carousel" data-bs-interval="4200" data-anim="fade-left" data-delay="170">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#homeBannerSlides" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Leadership and transformation"></button>
-            <button type="button" data-bs-target="#homeBannerSlides" data-bs-slide-to="1" aria-label="Institutional safety"></button>
-            <button type="button" data-bs-target="#homeBannerSlides" data-bs-slide-to="2" aria-label="Healing and wellbeing"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1400&q=80" class="d-block w-100" alt="Leaders collaborating in a workshop">
-              <div class="carousel-caption">
-                <span class="ls-banner-chip">Leadership & Training</span>
-                <h5>Build high-trust teams that perform with clarity</h5>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80" class="d-block w-100" alt="Professional team discussing workplace safety policies">
-              <div class="carousel-caption">
-                <span class="ls-banner-chip">Lightseed Shuddhi</span>
-                <h5>POSH · POCSO · DEI programs for safe institutions</h5>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=1400&q=80" class="d-block w-100" alt="Wellbeing session with mindful breathing practice">
-              <div class="carousel-caption">
-                <span class="ls-banner-chip">Healing & Therapy</span>
-                <h5>Support emotional resilience, awareness, and balance</h5>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#homeBannerSlides" data-bs-slide="prev" aria-label="Previous slide">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#homeBannerSlides" data-bs-slide="next" aria-label="Next slide">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <div class="d-flex flex-column gap-3">
-          <a href="/training" class="ls-hero-card text-decoration-none" data-anim="fade-left" data-delay="250">
-            <div class="d-flex align-items-center gap-3 p-3">
-              <div style="font-size:1.8rem;">🎯</div>
-              <div>
-                <h6 class="mb-0">Leadership & Training</h6>
-                <p>Emotionally intelligent leaders and high-performing teams</p>
-              </div>
-            </div>
-          </a>
-          <a href="/shuddhi" class="ls-hero-card text-decoration-none" data-anim="fade-left" data-delay="360">
-            <div class="d-flex align-items-center gap-3 p-3">
-              <div style="font-size:1.8rem;">⚖️</div>
-              <div>
-                <h6 class="mb-0">Lightseed Shuddhi</h6>
-                <p>POSH · POCSO · DEI — Institutional safety & compliance</p>
-              </div>
-            </div>
-          </a>
-          <a href="/healing" class="ls-hero-card text-decoration-none" data-anim="fade-left" data-delay="470">
-            <div class="d-flex align-items-center gap-3 p-3">
-              <div style="font-size:1.8rem;">🌿</div>
-              <div>
-                <h6 class="mb-0">Healing & Wellbeing</h6>
-                <p>Breathwork, resilience and inner alignment programs</p>
-              </div>
-            </div>
-          </a>
-          <a href="/therapy" class="ls-hero-card text-decoration-none" data-anim="fade-left" data-delay="580">
-            <div class="d-flex align-items-center gap-3 p-3">
-              <div style="font-size:1.8rem;">🕊️</div>
-              <div>
-                <h6 class="mb-0">Therapy & Coaching</h6>
-                <p>Confidential support for clarity and meaningful change</p>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
+<section class="ls-hero ls-hero-slider-wrap">
+  <div id="premiumHeroSlider" class="carousel slide carousel-fade ls-hero-slider" data-bs-ride="carousel" data-bs-interval="5200" data-bs-pause="false">
+    <div class="carousel-indicators ls-hero-indicators">
+      <button type="button" data-bs-target="#premiumHeroSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Leadership Excellence"></button>
+      <button type="button" data-bs-target="#premiumHeroSlider" data-bs-slide-to="1" aria-label="Institutional Safety"></button>
+      <button type="button" data-bs-target="#premiumHeroSlider" data-bs-slide-to="2" aria-label="Personal Wellbeing"></button>
     </div>
+
+    <div class="carousel-inner">
+      <article class="carousel-item active">
+        <div class="ls-hero-slide-bg">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=2200&q=80" alt="Leadership team in a strategy session">
+        </div>
+        <div class="ls-hero-layer"></div>
+        <div class="ls-particles"></div>
+        <div class="container ls-hero-content">
+          <div class="row align-items-center min-vh-100 py-5">
+            <div class="col-xl-7 col-lg-8">
+              <span class="eyebrow" data-anim="fade-down">Executive Development & Culture Design</span>
+              <h1 data-anim="fade-up" data-delay="100">Build leaders who create clarity, trust, and measurable momentum.</h1>
+              <p class="ls-hero-sub mt-3 mb-4" data-anim="fade-up" data-delay="200">Lightseed partners with founders, leadership teams, and institutions to align behaviour with business outcomes through deep human development.</p>
+              <div class="d-flex flex-wrap gap-3" data-anim="fade-up" data-delay="300">
+                <a href="/contact" class="btn-ls-primary">Book a Strategy Call</a>
+                <a href="/services" class="btn-ls-outline">Explore Programs</a>
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 ms-auto d-none d-lg-block">
+              <div class="ls-hero-highlight" data-anim="fade-left" data-delay="300">
+                <p>Trusted interventions across leadership, compliance, and wellbeing ecosystems.</p>
+                <ul>
+                  <li>Leadership & behavioural excellence</li>
+                  <li>POSH · POCSO · DEI implementation</li>
+                  <li>Resilience and therapy pathways</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="carousel-item">
+        <div class="ls-hero-slide-bg">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=2200&q=80" alt="Professionals in a compliance training workshop">
+        </div>
+        <div class="ls-hero-layer"></div>
+        <div class="ls-particles"></div>
+        <div class="container ls-hero-content">
+          <div class="row align-items-center min-vh-100 py-5">
+            <div class="col-xl-7 col-lg-8">
+              <span class="eyebrow" data-anim="fade-down">Institutional Safety & Compliance</span>
+              <h1 data-anim="fade-up" data-delay="100">Design safer workplaces with policy, awareness, and accountability.</h1>
+              <p class="ls-hero-sub mt-3 mb-4" data-anim="fade-up" data-delay="200">Our Lightseed Shuddhi framework helps organisations move beyond checkbox training to practical culture shifts that protect people and performance.</p>
+              <div class="d-flex flex-wrap gap-3" data-anim="fade-up" data-delay="300">
+                <a href="/shuddhi" class="btn-ls-primary">View Shuddhi</a>
+                <a href="/contact" class="btn-ls-outline">Request a Consultation</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="carousel-item">
+        <div class="ls-hero-slide-bg">
+          <img src="https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=2200&q=80" alt="Mindfulness and wellbeing session">
+        </div>
+        <div class="ls-hero-layer"></div>
+        <div class="ls-particles"></div>
+        <div class="container ls-hero-content">
+          <div class="row align-items-center min-vh-100 py-5">
+            <div class="col-xl-7 col-lg-8">
+              <span class="eyebrow" data-anim="fade-down">Human Performance & Wellbeing</span>
+              <h1 data-anim="fade-up" data-delay="100">Unlock resilient teams through emotional intelligence and inner alignment.</h1>
+              <p class="ls-hero-sub mt-3 mb-4" data-anim="fade-up" data-delay="200">From leadership labs to therapy and breathwork, we create integrated pathways for sustainable energy, focus, and transformation.</p>
+              <div class="d-flex flex-wrap gap-3" data-anim="fade-up" data-delay="300">
+                <a href="/healing" class="btn-ls-primary">Explore Wellbeing</a>
+                <a href="/therapy" class="btn-ls-outline">Therapy & Coaching</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#premiumHeroSlider" data-bs-slide="prev" aria-label="Previous slide">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#premiumHeroSlider" data-bs-slide="next" aria-label="Next slide">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
   </div>
 </section>
 
