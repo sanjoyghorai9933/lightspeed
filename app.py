@@ -9,10 +9,11 @@ import sqlite3
 import json
 import hashlib
 import secrets
+import re
 from datetime import datetime, timedelta
 from functools import wraps
 from flask import (Flask, render_template, request, jsonify,
-                   redirect, url_for, session, g, send_from_directory)
+                   redirect, url_for, session, g, send_from_directory, abort)
 
 # ─── APP CONFIG ────────────────────────────────────────────────────────────────
 app = Flask(__name__)
@@ -21,6 +22,10 @@ app.config['DATABASE'] = os.path.join(app.instance_path, 'lightseed.db')
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=8)
 
 os.makedirs(app.instance_path, exist_ok=True)
+
+ALLOWED_ENQUIRY_STATUSES = {'new', 'contacted', 'converted', 'closed'}
+ALLOWED_PROGRAM_CATEGORIES = {'training', 'shuddhi', 'education', 'healing', 'therapy'}
+EMAIL_REGEX = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 
 # ─── DATABASE HELPERS ──────────────────────────────────────────────────────────
 def get_db():
@@ -148,6 +153,10 @@ def init_db():
 
     db.commit()
 
+
+def _is_valid_email(email):
+    return bool(EMAIL_REGEX.match(email or ''))
+
 # ─── AUTH DECORATOR ────────────────────────────────────────────────────────────
 def admin_required(f):
     @wraps(f)
@@ -257,7 +266,7 @@ def api_enquiry():
 
     if not name or not email:
         return jsonify({'success': False, 'error': 'Name and email are required'}), 400
-    if '@' not in email:
+    if not _is_valid_email(email):
         return jsonify({'success': False, 'error': 'Invalid email address'}), 400
 
     db = get_db()
@@ -276,7 +285,7 @@ def api_newsletter():
     email = (data.get('email') or '').strip()
     name  = (data.get('name') or '').strip()
 
-    if not email or '@' not in email:
+    if not _is_valid_email(email):
         return jsonify({'success': False, 'error': 'Valid email is required'}), 400
 
     db = get_db()
@@ -290,9 +299,14 @@ def api_newsletter():
 
 @app.route('/api/programs')
 def api_programs():
-    category = request.args.get('category', '')
+    category = request.args.get('category', '').strip().lower()
     db = get_db()
     if category:
+        if category not in ALLOWED_PROGRAM_CATEGORIES:
+            return jsonify({
+                'success': False,
+                'error': f"Invalid category. Use one of: {', '.join(sorted(ALLOWED_PROGRAM_CATEGORIES))}"
+            }), 400
         rows = db.execute(
             "SELECT * FROM programs WHERE active=1 AND category=? ORDER BY id",
             (category,)
@@ -408,7 +422,9 @@ def admin_enquiries():
 @app.route('/admin/enquiries/<int:eid>/status', methods=['POST'])
 @admin_required
 def admin_update_enquiry(eid):
-    new_status = request.form.get('status', 'new')
+    new_status = request.form.get('status', 'new').strip().lower()
+    if new_status not in ALLOWED_ENQUIRY_STATUSES:
+        abort(400, description='Invalid enquiry status')
     db = get_db()
     db.execute("UPDATE enquiries SET status=?, updated_at=datetime('now','localtime') WHERE id=?",
                (new_status, eid))
@@ -454,12 +470,21 @@ def admin_programs():
 @app.route('/admin/programs/add', methods=['POST'])
 @admin_required
 def admin_add_program():
+    title = request.form.get('title', '').strip()
+    category = request.form.get('category', '').strip().lower()
+    description = request.form.get('description', '').strip()
+    tag = request.form.get('tag', '').strip()
+    icon = request.form.get('icon', '📌').strip() or '📌'
+
+    if not title or not category:
+        abort(400, description='Program title and category are required')
+    if category not in ALLOWED_PROGRAM_CATEGORIES:
+        abort(400, description='Invalid program category')
+
     db = get_db()
     db.execute("""INSERT INTO programs (title,category,description,tag,icon)
                   VALUES (?,?,?,?,?)""",
-               (request.form['title'], request.form['category'],
-                request.form['description'], request.form['tag'],
-                request.form.get('icon','📌')))
+               (title, category, description, tag, icon))
     db.commit()
     return redirect(url_for('admin_programs'))
 
