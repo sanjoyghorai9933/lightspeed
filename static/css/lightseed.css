@@ -293,6 +293,58 @@ a:hover { color: var(--ls-teal); }
 .ls-hero-card h6 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--ls-cream); }
 .ls-hero-card p  { font-size: 0.78rem; color: rgba(250,246,238,0.5); margin: 0; }
 
+/* Hero banner slides */
+.ls-hero-carousel {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.25);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.28);
+}
+.ls-hero-carousel .carousel-item img {
+  height: 320px;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.03);
+}
+.ls-hero-carousel .carousel-item::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 14%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.1) 100%);
+}
+.ls-hero-carousel .carousel-caption {
+  text-align: left;
+  left: 1.1rem;
+  right: 1.1rem;
+  bottom: 1rem;
+  z-index: 2;
+}
+.ls-banner-chip {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  background: rgba(201,168,76,0.18);
+  border: 1px solid rgba(201,168,76,0.55);
+  color: var(--ls-cream);
+}
+.ls-hero-carousel .carousel-caption h5 {
+  margin-top: 0.65rem;
+  margin-bottom: 0;
+  color: var(--ls-cream);
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+.ls-hero-carousel .carousel-control-prev,
+.ls-hero-carousel .carousel-control-next {
+  width: 12%;
+}
+.ls-hero-carousel .carousel-indicators [data-bs-target] {
+  width: 26px;
+  height: 4px;
+  border-radius: 6px;
+}
+
 /* ── PAGE HERO (inner pages) ───────────────────────── */
 .ls-page-hero {
   padding: 9rem 0 5rem; position: relative; overflow: hidden;
@@ -615,6 +667,8 @@ a:hover { color: var(--ls-teal); }
 /* ── RESPONSIVE TWEAKS ────────────────────────────────── */
 @media (max-width: 768px) {
   .ls-hero { padding-top: 80px; min-height: auto; padding-bottom: 4rem; }
+  .ls-hero-carousel .carousel-item img { height: 250px; }
+  .ls-hero-carousel .carousel-caption h5 { font-size: 0.95rem; }
   .ls-page-hero { padding: 7rem 0 3.5rem; }
   .ls-admin-sidebar { width: 100%; min-height: auto; }
   .ls-form { padding: 1.5rem; }
